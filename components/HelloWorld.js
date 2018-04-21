@@ -16,7 +16,9 @@ class HelloWorld extends Component {
         </Head>
 
         <h1>Hello World from React</h1>
-        <Link href="/about">About Page</Link>
+        <Link href="/about">
+          <a title="About Page">About Page</a>
+        </Link>
       </section>
     );
   }
