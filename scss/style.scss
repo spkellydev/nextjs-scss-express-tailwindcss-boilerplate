@@ -1,9 +1,9 @@
+@tailwind preflight;
+@tailwind utilities;
+
 @import "_vars";
 @import "_mixins";
 @import "_extends";
-
-@tailwind preflight;
-@tailwind utilities;
 
 $font-size: 50px;
 
