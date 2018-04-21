@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "serve": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "build": "next build"
   },
   "keywords": [],
