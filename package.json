@@ -23,6 +23,7 @@
     "mysql2": "^1.5.3",
     "next": "^5.1.0",
     "node-sass": "^4.8.3",
+    "passport": "^0.4.0",
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.1.4",
     "raw-loader": "^0.5.1",
@@ -30,6 +31,7 @@
     "react-dom": "^16.3.2",
     "sass-loader": "^7.0.1",
     "sequelize": "^4.37.6",
-    "tailwindcss": "^0.5.2"
+    "tailwindcss": "^0.5.2",
+    "uuid": "^3.2.1"
   }
 }
