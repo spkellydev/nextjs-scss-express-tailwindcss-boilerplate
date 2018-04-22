@@ -13,15 +13,20 @@ const getRoutes = require("./routes");
 const routes = getRoutes();
 app.prepare().then(() => {
   const server = express();
-  server.get("*", (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { pathname, query = {} } = parsedUrl;
-    const route = routes[pathname];
-    if (route) {
-      return app.render(req, res, route.page, query);
-    }
-    return handle(req, res);
-  });
+  server
+    .get("*", (req, res) => {
+      const parsedUrl = parse(req.url, true);
+      const { pathname, query = {} } = parsedUrl;
+      const route = routes[pathname];
+      if (route) {
+        return app.render(req, res, route.page, query);
+      }
+      return handle(req, res);
+    })
+    .catch(ex => {
+      console.error(ex.stack);
+      process.exit(1);
+    });
 
   server.listen(PORT, err => {
     if (err) throw err;
