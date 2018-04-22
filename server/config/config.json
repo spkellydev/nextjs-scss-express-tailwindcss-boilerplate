@@ -5,7 +5,8 @@
     "database": "next_houses",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "logging": false
+    "logging": false,
+    "operatorsAliases": "Sequelize.Op"
   },
   "test": {
     "username": "root",

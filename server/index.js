@@ -1,8 +1,10 @@
 const express = require("express");
 const session = require("express-session");
 const uuid = require("uuid");
-const next = require("next");
+const bodyParser = require("body-parser");
 const { parse } = require("url");
+
+const next = require("next");
 
 // Set Environment
 const dev = process.env.NODE_ENV || "development";
@@ -26,13 +28,18 @@ app
   .then(() => {
     const server = express();
 
-    // Generate Unique Session IDs
+    // Generate Unique Session Secret tokens
     server.use(
       session({
         secret: uuid.v1(),
-        name: "sessionId"
+        name: "sessionId",
+        resave: true,
+        saveUninitialized: true
       })
     );
+
+    server.use(bodyParser.urlencoded({ extended: true }));
+    server.use(bodyParser.json());
 
     // Use React application on server
     server.get("*", (req, res) => {
