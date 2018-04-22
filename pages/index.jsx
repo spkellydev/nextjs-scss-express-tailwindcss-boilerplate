@@ -1,5 +1,3 @@
-import "../scss/style.scss";
-
 const Index = () => (
   <div className="index">
     <h1>Hello World</h1>
