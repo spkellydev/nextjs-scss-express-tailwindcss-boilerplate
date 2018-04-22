@@ -9,7 +9,7 @@ const dev = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || 3000;
 
 // Next App
-const app = next({ dir: ".", dev });
+const app = next({ dir: "./app", dev });
 const handle = app.getRequestHandler();
 
 // Sequelize
