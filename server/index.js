@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const app = next({ dir: ".", dev });
 const handle = app.getRequestHandler();
 
-const models = require("../models");
+const models = require("./models");
 
 const getRoutes = require("./routes");
 
