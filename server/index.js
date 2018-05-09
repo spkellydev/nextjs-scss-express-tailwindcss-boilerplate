@@ -41,6 +41,8 @@ app
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
 
+    server.use(require("./routes/scraper"));
+
     // Use React application on server
     server.get("*", (req, res) => {
       // Parse url param, slashesDenoteHost
