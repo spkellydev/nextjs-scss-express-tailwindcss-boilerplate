@@ -43,4 +43,32 @@ module.exports = class Scrape {
       );
     });
   }
+
+  getIndividualUnitInformation(url, cb) {
+    return new Promise(resolve => {
+      if (url !== "https://rvusa.comnull") {
+        request(
+          url,
+          function(error, response, html) {
+            if (error) console.log(error);
+            const $ = cheerio.load(html);
+
+            $("ul.detail-info")
+              .parent()
+              .each((i, e) => {
+                console.log($(e).html());
+              });
+          },
+          function(error, response, html) {
+            if (!error) resolve(html);
+            else console.log(error);
+          }
+        );
+        if (cb) {
+          console.log("callback");
+          cb();
+        }
+      }
+    });
+  }
 };

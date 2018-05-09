@@ -41,7 +41,7 @@ app
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
 
-    server.use(require("./routes/scraper"));
+    server.use("/scraper", require("./routes/scraper"));
     server.use("/api", require("./routes/sites"));
 
     // Use React application on server
