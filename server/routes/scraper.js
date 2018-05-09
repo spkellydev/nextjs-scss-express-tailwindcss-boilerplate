@@ -4,11 +4,11 @@ const Scraper = require("../lib/scraper");
 
 router.get("/scraper", (req, res) => {
   let scraper = new Scraper(
-    { source: "RV USA", collection: "used" },
+    { source: "RV USA", collection: "used", base: "https://rvusa.com/" },
     "https://www.rvusa.com/rv-directory/new-jersey/colonial-airstream-rv-lakewood-nj-08701-779?category_id=1&condition="
   );
 
-  scraper.getContent(scraper.source, function() {
+  scraper.getArchivePageInformation(scraper.source, function() {
     res.redirect("/api/sites");
   });
 });

@@ -8,7 +8,7 @@ module.exports = class Scrape {
     this.url = url;
   }
 
-  getContent(source, cb) {
+  getArchivePageInformation(source, cb) {
     return new Promise(resolve => {
       request(
         this.url,
