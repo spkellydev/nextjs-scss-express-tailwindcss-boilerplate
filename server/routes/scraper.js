@@ -29,8 +29,8 @@ router.get("/build/units", (req, res) => {
       if (unit.url !== null) {
         let url = (source.base + unit.url).replace(" ", "");
         let scraper = new Scraper(source, url);
-        scraper.getIndividualUnitInformation(scraper.url, () => {
-          console.log("router");
+        scraper.getIndividualUnitInformation(scraper.url, "Used", r => {
+          console.log("passed");
         });
       }
     });
