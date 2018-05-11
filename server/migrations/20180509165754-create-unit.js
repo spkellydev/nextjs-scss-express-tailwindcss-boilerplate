@@ -23,12 +23,6 @@ module.exports = {
       walkThroughVideoTour: {
         type: Sequelize.STRING
       },
-      creditApplicationLink: {
-        type: Sequelize.STRING
-      },
-      tradeInAppraisal: {
-        type: Sequelize.STRING
-      },
       regularPrice: {
         type: Sequelize.STRING
       },

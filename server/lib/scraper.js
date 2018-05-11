@@ -15,6 +15,12 @@ module.exports = class Scrape {
         function(error, response, html) {
           const $ = cheerio.load(html);
 
+          console.log(
+            $(".col-md-7 h2")
+              .text()
+              .split(" ")[0]
+          );
+
           $(".inv-listing").each(async (i, e) => {
             let site = models.Site.build({
               source: source,
@@ -66,30 +72,44 @@ module.exports = class Scrape {
               });
 
               unit.featuredImage = $(".open-colorbox-detail img").attr("src");
-              $("img[itemprop='contentUrl']").each((i, e) => {
-                if ($(e).attr("src") === "undefined") {
-                  console.log("undefined found");
-                } else if (
-                  $(e)
-                    .attr("alt")
-                    .includes("floorplan") == true
-                ) {
-                  unit.floorplans = $(e).attr("src");
-                } else {
-                  unit.imageGallery += $(e).attr("src") + ",";
+              $(".thumbnail-image").each((i, e) => {
+                let imgurl = $(e).html();
+                unit.imageGallery +=
+                  imgurl.match(/data-lazy="(.+?)"/)[1].split(";")[0] + ",";
+                if (i === $(".thumbnail-image").length - 1) {
+                  let floorplan = $(e).html();
+                  unit.floorplans = floorplan
+                    .match(/data-lazy="(.+?)"/)[1]
+                    .split(";")[0];
                 }
               });
+
+              unit.walkThroughVideoTour = $("a.thumbnail-video").attr(
+                "onclick"
+              );
+
+              if (unit.walkThroughVideoTour) {
+                unit.walkThroughVideoTour = unit.walkThroughVideoTour.match(
+                  /'(.+?)'/
+                )[0];
+              }
 
               $("ul.detail-info")
                 .parent()
                 .each((i, e) => {
                   let detailBlock = cheerio.load(e);
                   if (i > 0) {
-                    unit.stockStatus = detailBlock("li img:first-of-type").attr(
-                      "alt"
-                    );
+                    unit.stockStatus =
+                      detailBlock("li img:first-of-type").attr("alt") || "Sold";
                     unit.sku = detailBlock("li:nth-of-type(2) span").text();
                     unit.year = detailBlock("li:contains('Year') span").text();
+
+                    if (parseInt(unit.year) >= 2017) {
+                      unit.category = "Used";
+                    } else {
+                      unit.category = "New";
+                    }
+
                     unit.make = detailBlock(
                       "li:contains('Manufacturer') span"
                     ).text();
@@ -139,7 +159,7 @@ module.exports = class Scrape {
                     ).text();
                     unit.GVWR = detailBlock("li:contains('GVWR') span").text();
                     unit.mileage = detailBlock(
-                      "li:contains('mileage') span"
+                      "li:contains('Mileage') span"
                     ).text();
                     unit.payloadCapacity = detailBlock(
                       'li:contains("Payload Capacity") span'
@@ -153,8 +173,18 @@ module.exports = class Scrape {
                     unit.numberOfAxles = detailBlock(
                       "li:contains('# Axles') span"
                     ).text();
-
-                    console.log(unit.sku);
+                    unit.numberOfACs = detailBlock(
+                      "li:contains('Air Conditioners') span"
+                    ).text();
+                    unit.acSpecs = detailBlock(
+                      "li:contains('A/C Spec') span"
+                    ).text();
+                    unit.slideOuts = detailBlock(
+                      "li:contains('Slideouts') span"
+                    ).text();
+                    unit.engineManufacturer = detailBlock(
+                      "li:contains('Engine Manufacturer') span"
+                    ).text();
                   }
                 });
 

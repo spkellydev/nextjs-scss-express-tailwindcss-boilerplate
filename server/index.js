@@ -43,7 +43,7 @@ app
 
     server.use("/scraper", require("./routes/scraper"));
     server.use("/api", require("./routes/sites"));
-
+    server.use("/models", require("./routes/units"));
     // Use React application on server
     server.get("*", (req, res) => {
       // Parse url param, slashesDenoteHost

@@ -8,8 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       category: DataTypes.STRING,
       floorplans: DataTypes.STRING,
       walkThroughVideoTour: DataTypes.STRING,
-      creditApplicationLink: DataTypes.STRING,
-      tradeInAppraisal: DataTypes.STRING,
       regularPrice: DataTypes.STRING,
       salePrice: DataTypes.STRING,
       MSRP: DataTypes.STRING,

@@ -12,7 +12,7 @@ let source = {
 router.get("/build", (req, res) => {
   let scraper = new Scraper(
     source,
-    "https://www.rvusa.com/rv-directory/new-jersey/colonial-airstream-rv-lakewood-nj-08701-779?category_id=1&condition=2"
+    "https://www.rvusa.com/rv-directory/new-jersey/colonial-airstream-rv-lakewood-nj-08701-779?per_page=200"
   );
 
   scraper.getArchivePageInformation(scraper.source, () => {
@@ -29,8 +29,8 @@ router.get("/build/units", (req, res) => {
       if (unit.url !== null) {
         let url = (source.base + unit.url).replace(" ", "");
         let scraper = new Scraper(source, url);
-        scraper.getIndividualUnitInformation(scraper.url, "Used", r => {
-          console.log("passed");
+        scraper.getIndividualUnitInformation(scraper.url, "New", r => {
+          res.end(r);
         });
       }
     });
