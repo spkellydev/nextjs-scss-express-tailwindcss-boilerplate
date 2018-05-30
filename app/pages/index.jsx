@@ -1,9 +1,11 @@
-import "../scss/style.scss";
+import Page from '../layouts/page';
 
 const Index = () => (
-  <div className="index">
-    <h1>Scrape</h1>
-  </div>
+  <Page>
+    <div className="index">
+      <h1>Blanka</h1>
+    </div>
+  </Page>
 );
 
 export default Index;
