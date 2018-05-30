@@ -1,9 +1,13 @@
 import "../scss/style.scss";
 import fetch from 'isomorphic-unfetch'
+import LogTable from '../components/LogTable';
+import LogAnalyzer from '../components/LogAnalyzer';
 
-const Logs = () => (
+const Logs = (props) => (
   <div>
     <h1>Logs</h1>
+    <LogTable logs={props.logs} />
+    <LogAnalyzer logs={props.logs} />
   </div>
 )
 
