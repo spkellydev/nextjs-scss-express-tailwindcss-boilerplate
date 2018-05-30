@@ -45,6 +45,7 @@ app
     server.use("/api", require("./routes/sites"));
     server.use("/models", require("./routes/units"));
     server.use("/logs", require("./routes/logs"));
+
     // Use React application on server
     server.get("*", (req, res) => {
       // Parse url param, slashesDenoteHost
