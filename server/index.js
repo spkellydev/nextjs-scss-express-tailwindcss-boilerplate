@@ -44,6 +44,7 @@ app
     server.use("/scraper", require("./routes/scraper"));
     server.use("/api", require("./routes/sites"));
     server.use("/models", require("./routes/units"));
+    server.use("/logs", require("./routes/logs"));
     // Use React application on server
     server.get("*", (req, res) => {
       // Parse url param, slashesDenoteHost
@@ -61,7 +62,7 @@ app
     });
 
     // Connect to DB
-    models.sequelize.sync().then(function() {
+    models.sequelize.sync().then(function () {
       server.listen(PORT, err => {
         if (err) throw err;
         console.log(`> Ready on ${PORT}`);
