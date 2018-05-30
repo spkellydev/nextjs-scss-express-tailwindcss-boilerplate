@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Post from "../../layouts/post";
 import Editor from "../../components/Editor";
+import Button from "../../components/Button";
 
-const Edit = () => (
+const Edit = props => (
   <Post>
     <Head>
       <link
@@ -13,6 +14,7 @@ const Edit = () => (
     </Head>
     <h1>Edit Blog Post</h1>
     <Editor />
+    <Button text="Blog" className="btn btn-primary" />
   </Post>
 );
 

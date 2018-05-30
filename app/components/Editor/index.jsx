@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Editor from "react-pell";
 
 class PellEditor extends Component {
