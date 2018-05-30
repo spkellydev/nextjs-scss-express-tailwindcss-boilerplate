@@ -12,7 +12,7 @@ module.exports = class Scrape {
     return new Promise(resolve => {
       request(
         this.url,
-        function(error, response, html) {
+        function (error, response, html) {
           const $ = cheerio.load(html);
 
           console.log(
@@ -42,7 +42,7 @@ module.exports = class Scrape {
             cb();
           }
         },
-        function(error, response, html) {
+        function (error, response, html) {
           if (!error) resolve(html);
           else console.log(error);
         }
@@ -56,9 +56,9 @@ module.exports = class Scrape {
         request(
           {
             url: url,
-            headers: { "User-Agent": "Scott Motor Coach RV Center" }
+            headers: { "User-Agent": "Camping World Bot" }
           },
-          function(error, response, html) {
+          function (error, response, html) {
             if (error) console.log(error);
             try {
               const $ = cheerio.load(html);
@@ -111,8 +111,8 @@ module.exports = class Scrape {
                     }
 
                     unit.make = detailBlock(
-                      "li:contains('Manufacturer') span"
-                    ).text();
+                      "li:contains('Manufacturer')"
+                    )[0].childNodes('span').text()
                     unit.model = detailBlock(
                       "li:contains('Model') span"
                     ).text();
@@ -195,7 +195,7 @@ module.exports = class Scrape {
               console.error(e.stack || e);
             }
           },
-          function(error, response, html) {
+          function (error, response, html) {
             if (!error) resolve(html);
             else console.log(error);
           }
