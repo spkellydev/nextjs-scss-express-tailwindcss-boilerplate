@@ -15,7 +15,7 @@ const app = next({ dir: "./app", dev });
 const handle = app.getRequestHandler();
 
 // Sequelize
-const models = require("./models");
+const models = require("./db/models");
 
 /**
  * Front end Routes
@@ -40,6 +40,7 @@ app
 
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
+    server.use(require("./routes/blog"));
 
     // Use React application on server
     server.get("*", (req, res) => {
